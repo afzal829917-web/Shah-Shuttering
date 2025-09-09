@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shah Shuttering & Scaffolding Rental Services</title>
+  <meta name="description" content="Affordable shuttering & scaffolding rental services. Browse inventory, get instant quote, and book delivery.">
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a34;
+      --muted:#8ea0c7;
+      --accent:#4f7cff;
+      --accent-2:#22c55e;
+      --border:#20315b;
+      --text:#e8eeff;
+      --danger:#ef4444;
+      --warning:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; color:var(--text); background:linear-gradient(180deg,#060913,#0b1020 20%,#0b1020 60%, #0a0f1f 100%);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1200px; margin:0 auto; padding:0 20px}
+    /* Navbar */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.4) blur(8px); background:rgba(6,9,19,.6); border-bottom:1px solid var(--border)}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
+    .brand .logo{width:36px; height:36px; border-radius:10px; background:conic-gradient(from 120deg at 50% 50%, var(--accent), #60a5fa, #818cf8, #22c55e); box-shadow:0 0 24px rgba(79,124,255,.35)}
+    .nav-links{display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+    .nav-links a{padding:8px 12px; border-radius:10px; border:1px solid transparent}
+    .nav-links a:hover{border-color:var(--border); background:#0e1530}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(180deg,#12224b,#0f1a3a); color:var(--text); cursor:pointer}
+    .btn:hover{filter:brightness(1.08)}
+    .btn.primary{background:linear-gradient(180deg,#4f7cff,#3b6af7); border-color:#3a63e3}
+    .btn.success{background:linear-gradient(180deg,#22c55e,#16a34a); border-color:#199a46}
+    .btn.ghost{background:transparent}
+    /* Hero */
+    .hero{padding:56px 0 36px; position:relative; overflow:hidden}
+    .hero-grid{display:grid; grid-template-columns:1fr; gap:24px}
+    .hero h1{font-size:clamp(28px,5vw,46px); line-height:1.1; margin:0 0 14px}
+    .hero p{color:var(--muted); margin:0 0 20px; max-width:52ch}
+    .hero-cta{display:flex; gap:12px; flex-wrap:wrap}
+    .hero-card{background:radial-gradient(60% 110% at 0 0, #12224b, #0c142e 50%, #0b122a); border:1px solid var(--border); border-radius:18px; padding:18px}
+    .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px}
+    .metric{background:#0e1835; border:1px solid var(--border); padding:12px; border-radius:14px; text-align:center}
+    .metric b{display:block; font-size:20px}
+    /* Sections */
+    section{padding:48px 0; border-top:1px solid var(--border)}
+    h2{font-size:clamp(22px,3.5vw,32px); margin:0 0 16px}
+    .muted{color:var(--muted)}
+    /* Inventory */
+    .grid{display:grid; gap:16px}
+    @media(min-width:720px){.hero-grid{grid-template-columns:1.1fr .9fr} .grid.cols-3{grid-template-columns:repeat(3,1fr)} .grid.cols-2{grid-template-columns:repeat(2,1fr)}}
+    .card{background:linear-gradient(180deg,#0f1a39,#0b142f); border:1px solid var(--border); border-radius:18px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .card h3{margin:0; font-size:18px}
+    .tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#b6c7f2; padding:4px 8px; border:1px dashed var(--border); border-radius:999px}
+    .price{font-weight:700}
+    .qty-row{display:flex; gap:10px; align-items:center; margin-top:auto}
+    .qty-row input[type="number"]{width:90px; padding:10px; border-radius:10px; border:1px solid var(--border); background:#0a1330; color:var(--text)}
+    .note{font-size:12px; color:#a8b5d8}
+    .pill{padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:#0d1738; font-size:12px}
+    /* Quote builder */
+    .quote{display:grid; gap:16px}
+    .quote .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .quote input, .quote select, .quote textarea{width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#0a1330; color:var(--text)}
+    .table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; border:1px solid var(--border)}
+    .table th, .table td{padding:12px; text-align:left; border-bottom:1px solid var(--border)}
+    .table tfoot td{font-weight:700}
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{font-size:12px; color:#cfe0ff}
+    /* FAQ */
+    details{background:#0f1a39; border:1px solid var(--border); padding:12px; border-radius:12px}
+    summary{cursor:pointer}
+    /* Footer */
+    footer{padding:32px 0; border-top:1px solid var(--border); color:#a9b6db}
+    .cols{display:grid; gap:16px}
+    @media(min-width:900px){.cols{grid-template-columns:2fr 1fr 1fr}}
+    .small{font-size:12px; color:#93a7d2}
+    .divider{height:1px; background:var(--border); margin:14px 0}
+    .inline{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><span class="logo"></span>ShahShutterRent</div>
+      <div class="nav-links">
+        <a href="#inventory">Inventory</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#quote">Get Quote</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact" class="btn ghost">Contact</a>
+        <a href="#quote" class="btn primary">Book Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Shah Shuttering & Scaffolding Rentals for Fast, Safe Construction</h1>
+        <p>Quality cuplock systems, MS plates, jacks, and props — delivered to your site. Get an instant quote, confirm availability, and book in minutes.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#quote">Get Instant Quote</a>
+          <a class="btn" href="#inventory">Browse Inventory</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b id="statProjects">2,400+</b><span class="small">Projects served</span></div>
+          <div class="metric"><b>24–48h</b><span class="small">Typical delivery</span></div>
+          <div class="metric"><b>99.2%</b><span class="small">On-time returns</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="inline"><span class="pill">IS Standards</span><span class="pill">Load Tested</span><span class="pill">Site Pickup</span></div>
+        <div class="divider"></div>
+        <div class="small">Tip: Add items from the inventory below and they will appear in your quote automatically.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Inventory -->
+  <section id="inventory">
+    <div class="container">
+      <h2>Inventory</h2>
+      <p class="muted">Transparent day rates. Select quantity and add to quote.</p>
+      <div class="grid cols-3" id="inventoryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Pricing notes -->
+  <section id="pricing">
+    <div class="container">
+      <h2>Pricing & Terms</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Standard Day Rates</h3>
+          <table class="table" id="rateTable">
+            <thead><tr><th>Item</th><th>Rate/Day (₹)</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <span class="note">* Long-term discounts auto-apply on quotes: 8% (>=15 days), 15% (>=30 days).</span>
+        </div>
+        <div class="card">
+          <h3>Important</h3>
+          <ul class="muted">
+            <li>Security deposit may apply based on order size.</li>
+            <li>Damages/shortages chargeable as per market rates.</li>
+            <li>Delivery & pickup billed at cost (enter estimate in quote).</li>
+            <li>GST 18% added to taxable amount.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Builder / Booking -->
+  <section id="quote">
+    <div class="container">
+      <h2>Get Instant Quote</h2>
+      <p class="muted">Review your selected items, set rental days, and download / email the quote. You can confirm booking by submitting the form.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Your Cart</h3>
+          <div class="small muted">Add items from inventory or paste quantities directly.</div>
+          <table class="table" id="cartTable">
+            <thead>
+            <tr>
+              <th style="width:36%">Item</th>
+              <th>Qty</th>
+              <th>Rate</th>
+              <th>Days</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr><td colspan="4" class="muted">Subtotal</td><td id="subtotal">₹0</td><td></td></tr>
+              <tr><td colspan="4" class="muted">Discount</td><td id="discount">- ₹0</td><td></td></tr>
+              <tr><td colspan="4" class="muted">Delivery / Pickup</td><td>
+                <input type="number" id="delivery" min="0" value="0" aria-label="delivery-charge">
+              </td><td></td></tr>
+              <tr><td colspan="4" class="muted">Taxable Amount</td><td id="taxable">₹0</td><td></td></tr>
+              <tr><td colspan="4" class="muted">GST (18%)</td><td id="gst">₹0</td><td></td></tr>
+              <tr><td colspan="4"><b>Total</b></td><td id="grand">₹0</td><td></td></tr>
+            </tfoot>
+          </table>
+          <div class="actions">
+            <button class="btn" id="clearCart">Clear Cart</button>
+            <button class="btn" id="saveCart">Save</button>
+            <button class="btn" id="loadCart">Load</button>
+            <button class="btn primary" id="downloadQuote">Download Quote</button>
+            <button class="btn success" id="emailQuote">Email Quote</button>
+          </div>
+          <div class="small chip" id="cartHint"></div>
+        </div>
+        <div class="card">
+          <h3>Booking Details</h3>
+          <div class="quote">
+            <div class="row">
+              <div>
+                <label class="small">Contact Person</label>
+                <input id="bkName" placeholder="Full name" />
+              </div>
+              <div>
+                <label class="small">Phone</label>
+                <input id="bkPhone" placeholder="10-digit mobile" />
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label class="small">Site Address</label>
+                <input id="bkAddress" placeholder="Project / Site location" />
+              </div>
+              <div>
+                <label class="small">Email</label>
+                <input id="bkEmail" placeholder="name@example.com" />
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label class="small">Start Date</label>
+                <input type="date" id="bkStart" />
+              </div>
+              <div>
+                <label class="small">Rental Days</label>
+                <input type="number" id="bkDays" min="1" value="7" />
+              </div>
+            </div>
+            <label class="small">Notes</label>
+            <textarea id="bkNotes" rows="3" placeholder="Any special requirements (extra clamps, urgent delivery, etc.)"></textarea>
+            <div class="actions">
+              <button class="btn primary" id="submitBooking">Submit Booking Request</button>
+              <button class="btn" id="printWorkOrder">Print Work Order</button>
+            </div>
+            <div class="small" id="bookingMsg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials / FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2>FAQs</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <details open>
+            <summary><b>What areas do you serve?</b></summary>
+            <p class="muted">We deliver across city limits and nearby districts. Outstation deliveries arranged on request.</p>
+          </details>
+          <details>
+            <summary><b>How is pricing calculated?</b></summary>
+            <p class="muted">Daily rental × quantity × days. Delivery/pickup extra. GST 18% applies. Long-rent discounts auto-apply.</p>
+          </details>
+          <details>
+            <summary><b>Do you provide installation?</b></summary>
+            <p class="muted">We offer optional fitting support and site supervision. Mention this in booking notes.</p>
+          </details>
+        </div>
+        <div class="card">
+          <details>
+            <summary><b>What about damage or loss?</b></summary>
+            <p class="muted">Damages/shortages are chargeable at market rates. We conduct joint counts during delivery and pickup.</p>
+          </details>
+          <details>
+            <summary><b>Payment terms?</b></summary>
+            <p class="muted">50% advance to dispatch, balance on delivery. Weekly billing available for long-term projects.</p>
+          </details>
+          <details>
+            <summary><b>Can I get a site visit?</b></summary>
+            <p class="muted">Yes, site engineers can visit for assessment. Add a request in the notes field.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>ShutterRent</h3>
+          <p class="muted">Reliable shuttering & scaffolding rentals for contractors, builders, and developers.</p>
+          <div class="inline small"><span class="pill">Mon–Sun</span><span>06:00–18:00</span></div>
+        </div>
+        <div class="card">
+          <h3>Reach Us</h3>
+          <p class="muted small">+91-6391733132<br> afzalshah725@gmail.com<br> Pipra Kanak, Kushinagar, 274401</p>
+          <div class="inline">
+            <a class="btn" href="tel:+916391733132">Call</a>
+            <a class="btn" href="mailto:afzalshah725@gmail.com">Email</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Legal</h3>
+          <p class="muted small">© <span id="year"></span> ShutterRent. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container small">Built with ❤ for contractors. This is a demo site—replace contact, GSTIN, and address before going live.</div>
+  </footer>
+
+  <script>
+    // ====== Data ======
+    const ITEMS = [
+      { id:'ply_4*6', name:'Full Ply 4*6', unit:'pcs', rate: 50, desc:'Ply, 12mm, heavy duty.' },
+      { id:'side_1*6', name:'Side 1ft*6ft', unit:'pcs', rate: 20, desc:'12mm OD, heavy duty.' },
+      { id:'side_1*4', name:'Side 1ft*4ft', unit:'pcs', rate: 15, desc:'12mm OD, heavy duty.' },
+      { id:'', name:'side_16"*6ft', unit:'pcs', rate: 20, desc:'2.0–3.5m, 3T SWL.' },
+      { id:'Patra', name:'Patra 4 inch, 6 inch, 9 inch', unit:'pcs', rate: 5, desc:'Solid' },
+      { id:'Bans', name:'Bans 7ft, 9ft, 12ft', unit:'pcs', rate: 6, desc:'150x150mm base plate.' },
+      { id:'h_frame', name:'H-Frame', unit:'set', rate: 50, desc:'With cross bracing.' },
+      { id:'clamp', name:'Right Angle Clamp', unit:'pcs', rate: 3.5, desc:'Forged, drop tested.' },
+      { id:'pipe', name:'Scaffolding Pipe 6m', unit:'pcs', rate: 7.5, desc:'48.3mm, 3.2mm thickness.' }
+    ];
+
+    const GST_RATE = 0.18;
+
+    // ====== Inventory Render ======
+    const inventoryGrid = document.getElementById('inventoryGrid');
+    const rateTableBody = document.querySelector('#rateTable tbody');
+
+    function numberFmt(n){
+      return '₹' + (Math.round(n*100)/100).toLocaleString('en-IN');
+    }
+
+    function renderInventory(){
+      inventoryGrid.innerHTML = '';
+      rateTableBody.innerHTML = '';
+      ITEMS.forEach(item => {
+        // Inventory cards
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="inline" style="justify-content:space-between">
+            <h3>${item.name}</h3>
+            <span class="tag">${item.unit}</span>
+          </div>
+          <div class="muted small">${item.desc}</div>
+          <div class="inline" style="justify-content:space-between">
+            <div class="price">${numberFmt(item.rate)} <span class="small muted">/day</span></div>
+            <span class="pill">ID: ${item.id}</span>
+          </div>
+          <div class="qty-row">
+            <input type="number" min="1" value="10" id="qty_${item.id}" aria-label="quantity">
+            <button class="btn" data-add="${item.id}">Add to Quote</button>
+          </div>`;
+        inventoryGrid.appendChild(card);
+
+        // Rate table rows
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${item.name}</td><td>${numberFmt(item.rate)}</td>`;
+        rateTableBody.appendChild(tr);
+      });
+
+      // Wire add buttons
+      inventoryGrid.querySelectorAll('[data-add]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-add');
+          const qty = parseInt(document.getElementById('qty_'+id).value || '0', 10);
+          if(qty>0) addToCart(id, qty);
+        })
+      })
+    }
+
+    // ====== Cart State ======
+    let cart = {}; // { id: {qty, days, rate} }
+
+    function addToCart(id, qty){
+      const item = ITEMS.find(i=>i.id===id);
+      if(!item) return;
+      if(!cart[id]) cart[id] = { id, name:item.name, unit:item.unit, qty:0, days:7, rate:item.rate };
+      cart[id].qty += qty;
+      renderCart();
+      hint(`Added ${qty} × ${item.name}`);
+    }
+
+    function removeFromCart(id){ delete cart[id]; renderCart(); }
+
+    function updateCartField(id, field, value){
+      if(!cart[id]) return;
+      if(field==='qty' || field==='days' || field==='rate'){
+        const v = parseFloat(value||0);
+        cart[id][field] = isNaN(v) ? cart[id][field] : v;
+      }
+      renderCart();
+    }
+
+    const cartBody = document.querySelector('#cartTable tbody');
+    const subtotalEl = document.getElementById('subtotal');
+    const discountEl = document.getElementById('discount');
+    const deliveryEl = document.getElementById('delivery');
+    const taxableEl = document.getElementById('taxable');
+    const gstEl = document.getElementById('gst');
+    const grandEl = document.getElementById('grand');
+
+    function computeTotals(){
+      let subtotal = 0;
+      let daysMax = 0;
+      Object.values(cart).forEach(row=>{
+        subtotal += row.qty * row.rate * row.days;
+        daysMax = Math.max(daysMax, row.days||0);
+      });
+      // Long-rent discount tiers by max days in cart
+      let discRate = 0;
+      if(daysMax >= 30) discRate = 0.15; else if(daysMax >= 15) discRate = 0.08;
+      const discount = subtotal * discRate;
+      const delivery = parseFloat(deliveryEl.value||0);
+      const taxable = Math.max(0, subtotal - discount) + delivery;
+      const gst = taxable * GST_RATE;
+      const grand = taxable + gst;
+      return {subtotal, discount, delivery, taxable, gst, grand};
+    }
+
+    function renderCart(){
+      cartBody.innerHTML = '';
+      Object.values(cart).forEach(row=>{
+        const tr = document.createElement('tr');
+        const amount = row.qty * row.rate * row.days;
+        tr.innerHTML = `
+          <td>${row.name}</td>
+          <td><input type="number" min="0" value="${row.qty}" data-fld="qty" data-id="${row.id}"></td>
+          <td><input type="number" min="0" value="${row.rate}" step="0.5" data-fld="rate" data-id="${row.id}"></td>
+          <td><input type="number" min="1" value="${row.days}" data-fld="days" data-id="${row.id}"></td>
+          <td>${numberFmt(amount)}</td>
+          <td><button class="btn" data-remove="${row.id}">Remove</button></td>`;
+        cartBody.appendChild(tr);
+      })
+
+      // Wire inputs
+      cartBody.querySelectorAll('input').forEach(inp=>{
+        inp.addEventListener('change', e=>{
+          updateCartField(inp.getAttribute('data-id'), inp.getAttribute('data-fld'), inp.value)
+        })
+      });
+      // Wire removes
+      cartBody.querySelectorAll('[data-remove]').forEach(btn=>{
+        btn.addEventListener('click', ()=> removeFromCart(btn.getAttribute('data-remove')))
+      })
+
+      const t = computeTotals();
+      subtotalEl.textContent = numberFmt(t.subtotal);
+      discountEl.textContent = '- ' + numberFmt(t.discount);
+      taxableEl.textContent = numberFmt(t.taxable);
+      gstEl.textContent = numberFmt(t.gst);
+      grandEl.textContent = numberFmt(t.grand);
+      saveTmp();
+    }
+
+    deliveryEl.addEventListener('change', renderCart);
+
+    // Save/Load
+    const clearBtn = document.getElementById('clearCart');
+    const saveBtn = document.getElementById('saveCart');
+    const loadBtn = document.getElementById('loadCart');
+
+    function saveTmp(){ localStorage.setItem('sr_cart', JSON.stringify(cart)); localStorage.setItem('sr_delivery', deliveryEl.value||'0'); }
+    function loadTmp(){ try{ cart = JSON.parse(localStorage.getItem('sr_cart')||'{}')||{}; deliveryEl.value = localStorage.getItem('sr_delivery')||'0'; }catch{ cart={}; }
+      renderCart(); }
+
+    clearBtn.addEventListener('click', ()=>{ cart={}; renderCart(); hint('Cart cleared'); });
+    saveBtn.addEventListener('click', ()=>{ saveTmp(); hint('Saved locally'); });
+    loadBtn.addEventListener('click', ()=>{ loadTmp(); hint('Loaded saved cart'); });
+
+    // Quote: download/email
+    function buildQuoteText(){
+      const lines = [];
+      lines.push('ShutterRent – Rental Quote');
+      lines.push(new Date().toLocaleString());
+      lines.push('--------------------------------');
+      Object.values(cart).forEach(r=>{
+        lines.push(`${r.name} | Qty ${r.qty} | ₹${r.rate}/day | ${r.days} days = ${numberFmt(r.qty*r.rate*r.days)}`)
+      })
+      const t = computeTotals();
+      lines.push('--------------------------------');
+      lines.push(`Subtotal: ${numberFmt(t.subtotal)}`);
+      lines.push(`Discount: ${numberFmt(t.discount)}`);
+      lines.push(`Delivery: ${numberFmt(t.delivery)}`);
+      lines.push(`Taxable: ${numberFmt(t.taxable)}`);
+      lines.push(`GST (18%): ${numberFmt(t.gst)}`);
+      lines.push(`TOTAL: ${numberFmt(t.grand)}`);
+      return lines.join('\n');
+    }
+
+    document.getElementById('downloadQuote').addEventListener('click', ()=>{
+      const w = window.open('', 'PRINT', 'height=800,width=700');
+      const t = computeTotals();
+      const rows = Object.values(cart).map(r=>`<tr><td>${r.name}</td><td>${r.qty}</td><td>₹${r.rate}</td><td>${r.days}</td><td>${numberFmt(r.qty*r.rate*r.days)}</td></tr>`).join('');
+      w.document.write(`<!doctype html><html><head><title>Quote</title><style>
+        body{font-family:Arial; padding:24px}
+        h1{margin:0 0 6px}
+        .muted{color:#555}
+        table{width:100%; border-collapse:collapse; margin-top:12px}
+        th,td{border:1px solid #ddd; padding:8px; text-align:left}
+        tfoot td{font-weight:bold}
+      </style></head><body>
+        <h1>ShutterRent – Rental Quote</h1>
+        <div class="muted">${new Date().toLocaleString()}</div>
+        <hr>
+        <table><thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th>Days</th><th>Amount</th></tr></thead>
+        <tbody>${rows}</tbody>
+        <tfoot>
+          <tr><td colspan="4">Subtotal</td><td>${numberFmt(t.subtotal)}</td></tr>
+          <tr><td colspan="4">Discount</td><td>${numberFmt(t.discount)}</td></tr>
+          <tr><td colspan="4">Delivery</td><td>${numberFmt(t.delivery)}</td></tr>
+          <tr><td colspan="4">Taxable</td><td>${numberFmt(t.taxable)}</td></tr>
+          <tr><td colspan="4">GST (18%)</td><td>${numberFmt(t.gst)}</td></tr>
+          <tr><td colspan="4">TOTAL</td><td>${numberFmt(t.grand)}</td></tr>
+        </tfoot></table>
+        <p><small>Note: This is a system-generated quote for estimation purposes. Final confirmation will be shared over email/WhatsApp.</small></p>
+        <script>window.print();<\/script>
+      </body></html>`);
+      w.document.close(); w.focus();
+    });
+
+    document.getElementById('emailQuote').addEventListener('click', ()=>{
+      const body = encodeURIComponent(buildQuoteText());
+      const subject = encodeURIComponent('Rental Quote – ShutterRent');
+      location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+
+    // Booking form submit (demo)
+    const bkName = document.getElementById('bkName');
+    const bkPhone = document.getElementById('bkPhone');
+    const bkAddress = document.getElementById('bkAddress');
+    const bkEmail = document.getElementById('bkEmail');
+    const bkStart = document.getElementById('bkStart');
+    const bkDays = document.getElementById('bkDays');
+    const bkNotes = document.getElementById('bkNotes');
+    const bookingMsg = document.getElementById('bookingMsg');
+
+    document.getElementById('submitBooking').addEventListener('click', ()=>{
+      const errors = [];
+      if(!bkName.value.trim()) errors.push('Name');
+      if(!/^\d{10}$/.test(bkPhone.value.trim())) errors.push('Phone');
+      if(!bkAddress.value.trim()) errors.push('Address');
+      if(bkEmail.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(bkEmail.value)) errors.push('Email');
+      if(!bkStart.value) errors.push('Start Date');
+      if(parseInt(bkDays.value||'0',10) <= 0) errors.push('Days');
+      if(Object.keys(cart).length===0) errors.push('Cart items');
+
+      if(errors.length){
+        bookingMsg.style.color = '#fca5a5';
+        bookingMsg.textContent = 'Please fill: ' + errors.join(', ');
+        return;
+      }
+
+      const payload = {
+        customer:{ name:bkName.value.trim(), phone:bkPhone.value.trim(), email:bkEmail.value.trim(), address:bkAddress.value.trim() },
+        rental:{ start:bkStart.value, days:parseInt(bkDays.value,10) },
+        cart, totals: computeTotals(), notes: bkNotes.value.trim()
+      };
+
+      localStorage.setItem('sr_booking', JSON.stringify(payload));
+      bookingMsg.style.color = '#86efac';
+      bookingMsg.textContent = 'Booking request prepared. We will contact you shortly (demo).';
+    });
+
+    // Print work order from current cart
+    document.getElementById('printWorkOrder').addEventListener('click', ()=>{
+      const booking = JSON.parse(localStorage.getItem('sr_booking')||'null');
+      const t = computeTotals();
+      const rows = Object.values(cart).map(r=>`<tr><td>${r.name}</td><td>${r.qty}</td><td>${r.days}</td><td>₹${r.rate}</td></tr>`).join('');
+      const meta = booking ? `<p><b>Client:</b> ${booking.customer.name} | <b>Phone:</b> ${booking.customer.phone}<br><b>Site:</b> ${booking.customer.address}<br><b>Start:</b> ${booking.rental.start} for ${booking.rental.days} days</p>` : '';
+      const w = window.open('', 'WORK', 'height=800,width=700');
+      w.document.write(`<!doctype html><html><head><title>Work Order</title><style>
+        body{font-family:Arial; padding:24px}
+        h1{margin:0}
+        table{width:100%; border-collapse:collapse; margin-top:12px}
+        th,td{border:1px solid #ddd; padding:8px; text-align:left}
+      </style></head><body>
+        <h1>Dispatch Work Order</h1>
+        ${meta}
+        <table><thead><tr><th>Item</th><th>Qty</th><th>Days</th><th>Rate</th></tr></thead>
+        <tbody>${rows}</tbody></table>
+        <p><b>Total Payable:</b> ${numberFmt(t.grand)} (incl. GST)</p>
+        <script>window.print();<\/script>
+      </body></html>`);
+      w.document.close(); w.focus();
+    });
+
+    // Misc
+    function hint(msg){ const el = document.getElementById('cartHint'); el.textContent = msg; setTimeout(()=>{ el.textContent=''; }, 2200); }
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Initialize
+    renderInventory();
+    loadTmp();
+  </script>
+</body>
+</html>
